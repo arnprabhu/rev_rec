@@ -45,7 +45,7 @@ CREATE TABLE kmule.Z_customers
     BILL_TO_CITY            VARCHAR2(40 BYTE),
     BILL_TO_STATE           VARCHAR2(40 BYTE),
     BILL_TO_ZIP             VARCHAR2(20 BYTE),
-    BILL_TO_COUNTRY         VARCHAR2(32 BYTE),
+    BILL_TO_COUNTRY         VARCHAR2(40 BYTE),
     SHIP_TO_ORIG_SYSTEM_REF VARCHAR2(32 BYTE),
     SHIP_TO_FNAME           VARCHAR2(100 BYTE),
     SHIP_TO_LNAME           VARCHAR2(100 BYTE),
@@ -54,9 +54,10 @@ CREATE TABLE kmule.Z_customers
     SHIP_TO_CITY            VARCHAR2(40 BYTE),
     SHIP_TO_STATE           VARCHAR2(40 BYTE),
     SHIP_TO_ZIP             VARCHAR2(20 BYTE),
-    SHIP_TO_COUNTRY         VARCHAR2(32 BYTE),
+    SHIP_TO_COUNTRY         VARCHAR2(40 BYTE),
     PARENT_CUST_OWNER_ID    VARCHAR2(32 BYTE),
     Z_UPDATED_DATE          DATE,
+    Z_CREATED_DATE          DATE,
     PARTY_ID                NUMBER,
     BILL_TO_PARTY_SITE_ID   NUMBER,
     SHIP_TO_PARTY_SITE_ID   NUMBER,
@@ -64,6 +65,15 @@ CREATE TABLE kmule.Z_customers
     CREATION_DATE           DATE,
     PROCESS_STATUS          VARCHAR2(2 BYTE),
     ERROR_TEXT              VARCHAR2(255 BYTE)
+  )
+/
+CREATE TABLE kmule.z_customer_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
   )
 /
 CREATE INDEX kmule.z_customers_acct_idx ON kmule.z_customers
@@ -82,6 +92,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.Z_CUSTOMER_batches to apps
 /
 grant all on kmule.Z_CUSTOMERS to apps
+/
+grant all on kmule.z_customer_errors to apps
 /
 grant all on kmule.Z_CUSTOMER_INTERFACE_S to apps
 /
@@ -138,6 +150,15 @@ CREATE TABLE kmule.z_subscriptions
     error_text     VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_subscription_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_subscriptions_idx ON kmule.z_subscriptions
   (
     subscription_id
@@ -157,6 +178,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_subscription_batches to apps
 /
 grant all on kmule.z_subscriptions to apps
+/
+grant all on z_subscription_errors to apps
 /
 grant all on kmule.Z_SUBSCRIPTION_INTERFACE_S to apps
 /
@@ -191,6 +214,15 @@ CREATE TABLE kmule.Z_RATE_PLAN
     error_text           VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_rate_plan_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_rate_plan_idx ON kmule.z_rate_plan
   (
     rate_plan_id
@@ -205,6 +237,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_rate_plan_batches to apps
 /
 grant all on kmule.z_rate_plan to apps
+/
+grant all on z_rate_plan_errors to apps
 /
 grant all on kmule.Z_rate_plan_INTERFACE_S to apps
 /
@@ -253,6 +287,15 @@ CREATE TABLE kmule.z_rate_plan_charge
     error_text                  VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_rate_plan_charge_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_rate_plan_charge_idx ON kmule.z_rate_plan_charge
   (
     rate_plan_charge_id,
@@ -268,6 +311,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_rate_plan_charge_batches to apps
 /
 grant all on kmule.z_rate_plan_charge to apps
+/
+grant all on kmule.z_rate_plan_charge_errors to apps
 /
 grant all on kmule.Z_rate_plan_charge_INTERFACE_S to apps
 /
@@ -316,6 +361,15 @@ CREATE TABLE kmule.z_invoices
     error_text            VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_invoice_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_invoices_z_idx ON kmule.z_invoices
   (
     invoice_id,
@@ -338,6 +392,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_invoice_batches to apps
 /
 grant all on kmule.z_invoices to apps
+/
+grant all on kmule.z_invoice_errors to apps
 /
 grant all on kmule.Z_invoice_INTERFACE_S to apps
 /
@@ -383,6 +439,15 @@ CREATE TABLE kmule.z_invoice_items
     error_text          VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_invoice_item_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_invoice_items_z_idx ON kmule.z_invoice_items
   (
     invoice_id,
@@ -400,6 +465,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_invoice_item_BATCHES to apps
 /
 grant all on kmule.z_invoice_items to apps
+/
+grant all on kmule.z_invoice_item_errors to apps
 /
 grant all on kmule.Z_invoice_items_INTERFACE_S to apps
 /
@@ -449,6 +516,15 @@ CREATE TABLE kmule.z_refunds
     error_text         VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_refund_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_refunds_idx ON kmule.z_refunds
   (
     refund_id,
@@ -464,6 +540,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_refund_batches to apps
 /
 grant all on kmule.z_refunds to apps
+/
+grant all on kmule.z_refund_errors to apps
 /
 grant all on kmule.Z_refunds_INTERFACE_S to apps
 /
@@ -512,6 +590,15 @@ CREATE TABLE kmule.z_payments
     error_text          VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_payment_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_payments_z_idx ON kmule.z_payments
   (
     payment_id,
@@ -536,10 +623,11 @@ GRANT ALL ON kmule.z_payment_batches TO apps
 /
 GRANT ALL ON kmule.z_payments TO apps
 /
+grant all on kmule.z_payment_errors to apps
+/
 grant all on kmule.Z_payments_INTERFACE_S to apps
 /
 grant all on kmule.Z_payment_batches_S to apps
-/
 /
 CREATE TABLE kmule.Z_AMENDMENT_BATCHES
   (
@@ -576,6 +664,15 @@ CREATE TABLE kmule.z_amendments
     error_text           VARCHAR2(255)
   )
 /
+CREATE TABLE kmule.z_amendment_errors
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
 CREATE INDEX kmule.z_amendments_idx ON kmule.z_amendments
   (
     amendment_id,
@@ -591,6 +688,8 @@ START WITH 1 NOCACHE ORDER NOCYCLE
 grant all on kmule.z_amendment_batches to apps
 /
 grant all on kmule.z_amendments to apps
+/
+grant all on kmule.z_amendment_errors to apps
 /
 grant all on kmule.Z_amendments_INTERFACE_S to apps
 /

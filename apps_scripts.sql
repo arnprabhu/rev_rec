@@ -29,35 +29,53 @@ create synonym Z_CUSTOMER_batches for kmule.Z_CUSTOMER_batches
 /
 create synonym Z_CUSTOMERS for kmule.Z_CUSTOMERS
 /
+create synonym z_customer_errors for kmule.z_customer_errors
+/
 create synonym z_subscription_batches for kmule.z_subscription_batches
 /
 create synonym z_subscriptions for kmule.z_subscriptions
 /
+create synonym z_subscription_errors for kmule.z_subscription_errors
+/
 create synonym z_rate_plan for kmule.z_rate_plan
+/
+create synonym z_rate_plan_errors for kmule.z_rate_plan_errors
 /
 create synonym z_rate_plan_charge_batches for kmule.z_rate_plan_charge_batches
 /
 create synonym z_rate_plan_charge for kmule.z_rate_plan_charge
 /
+create synonym z_rate_plan_charge_errors for kmule.z_rate_plan_charge_errors
+/
 create synonym z_invoice_batches for kmule.z_invoice_batches
 /
 create synonym z_invoices for kmule.z_invoices
+/
+create synonym z_invoice_errors for kmule.z_invoice_errors
 /
 create synonym z_invoice_item_BATCHES for kmule.z_invoice_item_BATCHES
 /
 create synonym z_invoice_items for kmule.z_invoice_items
 /
+create synonym z_invoice_item_errors for kmule.z_invoice_item_errors
+/
 create synonym z_refund_batches for kmule.z_refund_batches
 /
 create synonym z_refunds for kmule.z_refunds
+/
+create synonym z_refund_errors for kmule.z_refund_errors
 /
 create synonym z_payment_batches for kmule.z_payment_batches
 /
 create synonym z_payments for kmule.z_payments
 /
+create synonym z_payment_errors for kmule.z_payment_errors
+/
 create synonym z_amendment_batches for kmule.z_amendment_batches
 /
 create synonym z_amendments for kmule.z_amendments
+/
+create synonym z_amendment_errors for kmule.z_amendment_errors
 /
 create synonym krr_customers for krr.krr_customers
 /
