@@ -39,6 +39,8 @@ create synonym z_subscription_errors for kmule.z_subscription_errors
 /
 create synonym z_rate_plan for kmule.z_rate_plan
 /
+create synonym z_rate_plan_batches for kmule.z_rate_plan_batches
+/
 create synonym z_rate_plan_errors for kmule.z_rate_plan_errors
 /
 create synonym z_rate_plan_charge_batches for kmule.z_rate_plan_charge_batches
