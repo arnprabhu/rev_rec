@@ -691,3 +691,129 @@ grant all on kmule.Z_amendments_INTERFACE_S to apps
 /
 grant all on kmule.Z_amendment_batches_S to apps
 /
+CREATE TABLE kmule.Z_INVOICE_PAYMENT_BATCHES
+  (
+    BATCH_ID                 NUMBER ,
+    min_trx_creation_date    DATE,
+    max_trx_creation_date    DATE,
+    min_trx_last_update_date DATE,
+    max_trx_last_update_date DATE,
+    RECORDS_QUERIED          NUMERIC ,
+    RECORDS_TRANSFERRED      NUMBER ,
+    PROCESSING_STATUS        VARCHAR2(20) ,
+    CREATION_DATE            DATE ,
+    LAST_UPDATE_DATE         DATE
+  )
+/
+CREATE TABLE kmule.Z_INVOICE_PAYMENTS
+  (
+    batch_id           NUMBER,
+    interface_id       NUMBER,
+    Invoice_Payment_Id VARCHAR2(32),
+    Amount             NUMBER,
+    Invoice_Id         VARCHAR2(32),
+    Payment_Id         VARCHAR2(32),
+    Refund_Amount       NUMBER,
+    z_updated_date     DATE,
+    z_created_date     DATE,
+    process_status     VARCHAR2(2),
+    creation_date      DATE,
+    error_text         VARCHAR2(255)
+  )
+/
+CREATE TABLE kmule.Z_INVOICE_PAYMENT_ERRORS
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
+CREATE INDEX kmule.z_invoice_payments_idx ON kmule.z_invoice_payments
+  (
+    invoice_payment_id,
+    invoice_id,
+    payment_id
+  )
+/
+CREATE SEQUENCE kmule.Z_invoice_payment_INTERFACE_S MINVALUE 1 INCREMENT BY 1 START WITH 1 CACHE 5 ORDER NOCYCLE
+/
+CREATE SEQUENCE kmule.Z_invoice_payment_batches_S MINVALUE 1 INCREMENT BY 1 START WITH 1 NOCACHE ORDER NOCYCLE
+/
+GRANT ALL ON kmule.z_invoice_payment_batches TO apps
+/
+GRANT ALL ON kmule.z_invoice_payments TO apps
+/
+GRANT ALL ON kmule.z_invoice_payment_errors TO apps
+/
+GRANT ALL ON kmule.Z_invoice_payment_INTERFACE_S TO apps
+/
+GRANT ALL ON kmule.Z_invoice_payment_batches_S TO apps
+/
+CREATE TABLE kmule.Z_INVOICE_ADJUSTMENT_BATCHES
+  (
+    BATCH_ID                 NUMBER ,
+    min_trx_creation_date    DATE,
+    max_trx_creation_date    DATE,
+    min_trx_last_update_date DATE,
+    max_trx_last_update_date DATE,
+    RECORDS_QUERIED          NUMERIC ,
+    RECORDS_TRANSFERRED      NUMBER ,
+    PROCESSING_STATUS        VARCHAR2(20) ,
+    CREATION_DATE            DATE ,
+    LAST_UPDATE_DATE         DATE
+  )
+/
+CREATE TABLE kmule.Z_INVOICE_ADJUSTMENTS
+  (
+    batch_id                  NUMBER,
+    interface_id              NUMBER,
+    Invoice_Adjustment_Id     VARCHAR2(32),
+    Account_Id                VARCHAR2(32),
+    Accounting_Code           VARCHAR2(32),
+    Adjustment_Date            DATE,
+    Adjustment_Number         VARCHAR2(50),
+    Amount                    NUMBER,
+    Cancelled_On              DATE,
+    Comments                  VARCHAR2(1000),
+    Account_Name              VARCHAR2(100),
+    Account_Number            VARCHAR2(100),
+    Impact_Amount             NUMBER,
+    Invoice_Id                VARCHAR2(32),
+    Invoice_Number            VARCHAR2(50),
+    Reason_Code               VARCHAR2(30),
+    Reference_Id              VARCHAR2(30),
+    Status                    VARCHAR2(30),
+    Transferred_To_Accounting VARCHAR2(15),
+    adjustment_Type           VARCHAR2(30),
+    z_updated_date            DATE,
+    z_created_date            DATE,
+    process_status            VARCHAR2(2),
+    creation_date             DATE,
+    error_text                VARCHAR2(255)
+  )
+/
+CREATE TABLE kmule.Z_INVOICE_ADJUSTMENT_ERRORS
+  (
+    batch_id      NUMBER,
+    object_id     VARCHAR2(32),
+    error_text    VARCHAR2(4000),
+    creation_date DATE,
+    error_status  VARCHAR2(2)
+  )
+/
+CREATE SEQUENCE kmule.Z_invoice_adj_INTERFACE_S MINVALUE 1 INCREMENT BY 1 START WITH 1 CACHE 5 ORDER NOCYCLE
+/
+CREATE SEQUENCE kmule.Z_invoice_adj_batches_S MINVALUE 1 INCREMENT BY 1 START WITH 1 NOCACHE ORDER NOCYCLE
+/
+GRANT ALL ON kmule.z_invoice_adjustment_batches TO apps
+/
+GRANT ALL ON kmule.z_invoice_adjustments TO apps
+/
+GRANT ALL ON kmule.z_invoice_adjustment_errors TO apps
+/
+GRANT ALL ON kmule.Z_invoice_adj_INTERFACE_S TO apps
+/
+GRANT ALL ON kmule.Z_invoice_adj_batches_S TO apps
+/

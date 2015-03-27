@@ -73,11 +73,23 @@ create synonym z_payments for kmule.z_payments
 /
 create synonym z_payment_errors for kmule.z_payment_errors
 /
+create synonym z_invoice_payment_batches for kmule.z_invoice_payment_batches
+/
+create synonym z_invoice_payments for kmule.z_invoice_payments
+/
+create synonym z_invoice_payment_errors for kmule.z_invoice_payment_errors
+/
 create synonym z_amendment_batches for kmule.z_amendment_batches
 /
 create synonym z_amendments for kmule.z_amendments
 /
 create synonym z_amendment_errors for kmule.z_amendment_errors
+/
+create synonym z_invoice_adjustment_batches for kmule.z_invoice_adjustment_batches
+/
+create synonym z_invoice_adjustments for kmule.z_invoice_adjustments
+/
+create synonym z_invoice_adjustment_errors for kmule.z_invoice_adjustment_errors
 /
 create synonym krr_customers for krr.krr_customers
 /
@@ -138,6 +150,15 @@ create synonym Z_CUSTOMER_INTERFACE_S for kmule.Z_CUSTOMER_INTERFACE_S
 /
 create synonym Z_CUSTOMER_batches_S for kmule.Z_CUSTOMER_batches_S
 /
+create synonym Z_invoice_payment_INTERFACE_S for kmule.Z_invoice_payment_INTERFACE_S
+/
+create synonym Z_invoice_payment_batches_S for kmule.Z_invoice_payment_batches_S
+/
+create synonym Z_invoice_adj_INTERFACE_S for kmule.Z_invoice_adj_INTERFACE_S
+/
+create synonym Z_invoice_adj_batches_S for kmule.Z_invoice_adj_batches_S
+/
+
 -- Add krr seq synonyms
 create synonym krr_amendment_s for krr.krr_amendment_s
 /
